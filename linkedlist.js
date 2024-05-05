@@ -19,6 +19,51 @@ class LinkedList {
         const newNode = new Node(value);
         
     }
+
+    size() {
+        let count = 0;
+        let node = this.head;
+        while (node) {
+            count++
+            node = node.next
+        }
+        return count;
+    }
+
+    head() {
+        return this.head;
+    }
+
+    tail() {
+        let lastNode = this.head;
+        if (lastNode) {
+        while (lastNode.next) {
+            lastNode = lastNode.next
+        }
+    }
+        return lastNode
+    }
+
+    at(index) {
+        if (index < 0) return null; // Handle negative index
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while (currentNode !== null && currentIndex !== index) {
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        return currentNode;
+    }
+
+    pop() {
+
+    }
+
+    contains(value) {
+        
+    }
 }
 
 class Node {
