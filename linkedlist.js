@@ -17,7 +17,6 @@ class LinkedList {
 
     prepend(value) {
         const newNode = new Node(value);
-        
     }
 
     size() {
@@ -58,23 +57,84 @@ class LinkedList {
     }
 
     pop() {
+        if (!this.head) return null; // Empty list
+        
+        let currentNode = this.head;
+        let prevNode = null;
 
+        while (currentNode.next !== null) {
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        // currentNode now points to the last node
+        if (prevNode) {
+            prevNode.next = null; // Update the second-to-last node's next pointer
+            this.tail = prevNode; // Update the tail pointer
+        } else {
+            // If there was only one node in the list
+            this.head = null;
+            this.tail = null;
+        }
+
+        return currentNode.value;
     }
 
     contains(value) {
-        
+        let current = this.head;
+        while (current) {
+            if (current.value === value) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
     }
+
+    find(value) {
+        let current = this.head;
+        let index = 0;
+        // Traverse through the linked list until the element is found
+        while (current !== null) {
+            if (current.value === value) {
+                return `Value found at index ${index}`;
+            }
+            current = current.next;
+            index++;
+        }
+        return "Value not found";
+    }
+
+
+toString() {
+    let result = '';
+    let current = this.head;
+    while (current) {
+        result += `(${current.value}) -> `;
+        current = current.next;
+    }
+    result += 'null';
+    return result;
+    }   
 }
 
 class Node {
     constructor(value = null, nextNode = null) {
         this.value = value;
-        this.nextNode = nextNode;
+        this.next = nextNode;
     }
 }
 
+/*
 const myList = new LinkedList();
 myList.append(1);
 myList.append(2);
 myList.append(3);
 console.log(myList);
+*/
+
+let myList = new LinkedList();
+myList.append(1);
+myList.append(2);
+myList.append(3);
+console.log(myList.toString());  // Output: (1) -> (2) -> (3) -> null
